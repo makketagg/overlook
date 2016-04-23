@@ -1,0 +1,5 @@
+pkg/*
+tmp/*
+lib/proto/downloaded/*
+.DS_Store
+spec/.DS_Store
