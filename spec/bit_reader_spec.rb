@@ -21,6 +21,17 @@ module Overlook
       end
     end
 
+    describe 'int32' do
+      it 'reads an int from the stream' do
+        data = [1,0,0,0].pack('C*')
+        io = StringIO.new(data)
+
+        @reader = BitReader.new(io)
+
+        expect(@reader.int32).to eq(1)
+      end
+    end
+
     describe 'byte' do
       it 'reads bytes from stream' do
         data = [1, 3, 5].pack('C*')
