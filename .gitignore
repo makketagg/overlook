@@ -1,5 +1,5 @@
 pkg/*
 tmp/*
-lib/proto/downloaded/*
+lib/proto/proto/*
 .DS_Store
 spec/.DS_Store
