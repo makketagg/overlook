@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    overlook (0.2.0)
+    overlook-csgo (0.2.0)
       beefcake
       steamidlib
       wisper
@@ -104,7 +104,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.10)
-  overlook!
+  overlook-csgo!
   pry
   rake (~> 10.0)
   rspec

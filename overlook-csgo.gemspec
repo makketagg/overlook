@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'overlook/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'overlook'
+  spec.name          = 'overlook-csgo'
   spec.version       = Overlook::VERSION
   spec.authors       = ['Taylor Finnell']
   spec.email         = ['tmfinnell@gmail.com']
