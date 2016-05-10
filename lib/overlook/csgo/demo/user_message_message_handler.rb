@@ -6,8 +6,9 @@ module Overlook
       class UserMessageMessageHandler
         include SteamIDs
 
-        SERVER_RANK_UPDATE_MESSAGE_TYPE = 52
-        XP_UPDATE_MESSAGE_TYPE          = 65
+        SERVER_RANK_UPDATE_MESSAGE_TYPE     = 52
+        XP_UPDATE_MESSAGE_TYPE              = 65
+        SEND_PLAYER_ITEM_DROP_MESSAGE_TYPE  = 61
 
         def initialize(parser)
           @parser = parser
@@ -17,6 +18,8 @@ module Overlook
           user_message = CSVCMsg_UserMessage.decode(message)
 
           case user_message.msg_type
+          when SEND_PLAYER_ITEM_DROP_MESSAGE_TYPE
+            # nop
           when XP_UPDATE_MESSAGE_TYPE
             xp_update_message =  CCSUsrMsg_XpUpdate.decode(user_message.msg_data)
 
