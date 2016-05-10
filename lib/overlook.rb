@@ -7,8 +7,8 @@ require 'overlook/byte_reader'
 
 require 'proto/compiled/descriptor.pb'
 require 'proto/compiled/netmessages.pb'
-require 'proto/compiled/cstrike15_usermessages.pb'
 require 'proto/compiled/cstrike15_gcmessages.pb'
+require 'proto/compiled/cstrike15_usermessages.pb'
 
 require 'steamidlib'
 

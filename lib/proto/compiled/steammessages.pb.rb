@@ -649,6 +649,15 @@ class CGCSystemMsg_GetAccountDetails_Response
   optional :suspension_end_time, :uint32, 21
   optional :currency, :string, 22
   optional :steam_level, :uint32, 23
+  optional :friend_count, :uint32, 24
+  optional :account_creation_time, :uint32, 25
+  optional :is_steamguard_enabled, :bool, 27
+  optional :is_phone_verified, :bool, 28
+  optional :is_two_factor_auth_enabled, :bool, 29
+  optional :two_factor_enabled_time, :uint32, 30
+  optional :phone_verification_time, :uint32, 31
+  optional :phone_id, :uint64, 33
+  optional :is_phone_identifying, :bool, 34
 end
 
 class CMsgGCGetPersonaNames

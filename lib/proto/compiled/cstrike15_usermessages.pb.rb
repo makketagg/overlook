@@ -65,6 +65,7 @@ module ECstrike15UserMessages
   CS_UM_ReportHit = 64
   CS_UM_XpUpdate = 65
   CS_UM_QuestProgress = 66
+  CS_UM_ScoreLeaderboardData = 67
 end
 
 class CCSUsrMsg_VGUIMenu
@@ -216,6 +217,10 @@ class CCSUsrMsg_DisplayInventory
 end
 
 class CCSUsrMsg_QuestProgress
+  include Beefcake::Message
+end
+
+class CCSUsrMsg_ScoreLeaderboardData
   include Beefcake::Message
 end
 
@@ -443,6 +448,7 @@ end
 class CCSUsrMsg_Damage
   optional :amount, :int32, 1
   optional :inflictor_world_pos, CMsgVector, 2
+  optional :victim_entindex, :int32, 3
 end
 
 class CCSUsrMsg_RadioText
@@ -478,11 +484,11 @@ class CCSUsrMsg_ProcessSpottedEntityUpdate
 end
 
 class CCSUsrMsg_SendPlayerItemDrops
-  # repeated :entity_updates, CEconItemPreviewDataBlock, 1
+  repeated :entity_updates, CEconItemPreviewDataBlock, 1
 end
 
 class CCSUsrMsg_SendPlayerItemFound
-  # optional :iteminfo, CEconItemPreviewDataBlock, 1
+  optional :iteminfo, CEconItemPreviewDataBlock, 1
   optional :entindex, :int32, 2
 end
 
@@ -556,6 +562,11 @@ class CCSUsrMsg_QuestProgress
   optional :quest_id, :uint32, 1
   optional :normal_points, :uint32, 2
   optional :bonus_points, :uint32, 3
+  optional :is_event_quest, :bool, 4
+end
+
+class CCSUsrMsg_ScoreLeaderboardData
+  optional :data, ScoreLeaderboardData, 1
 end
 
 class CCSUsrMsg_XRankGet
@@ -617,10 +628,6 @@ class CCSUsrMsg_ServerRankUpdate
     optional :rank_change, :float, 5
   end
   repeated :rank_update, CCSUsrMsg_ServerRankUpdate::RankUpdate, 1
-end
-
-class CMsgGCCstrike15_v2_GC2ServerNotifyXPRewarded
-  include Beefcake::Message
 end
 
 class CCSUsrMsg_XpUpdate

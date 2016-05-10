@@ -26,6 +26,7 @@ module CLC_Messages
   clc_SplitPlayerConnect = 16
   clc_ClientMessage = 17
   clc_CmdKeyValues = 18
+  clc_HltvReplay = 20
 end
 
 module VoiceDataFormat_t
@@ -67,6 +68,14 @@ module SVC_Messages
   svc_PaintmapData = 33
   svc_CmdKeyValues = 34
   svc_EncryptedData = 35
+  svc_HltvReplay = 36
+end
+
+module ReplayEventType_t
+  REPLAY_EVENT_CANCEL = 0
+  REPLAY_EVENT_DEATH = 1
+  REPLAY_EVENT_GENERIC = 2
+  REPLAY_EVENT_STUCK_NEED_FULL_UPDATE = 3
 end
 
 class CMsgVector
@@ -268,7 +277,7 @@ class CSVCMsg_GameEventList
     include Beefcake::Message
   end
 
-  class Descriptor
+  class Descriptor_t
     include Beefcake::Message
   end
 end
@@ -301,6 +310,14 @@ class CSVCMsg_EncryptedData
   include Beefcake::Message
 end
 
+class CSVCMsg_HltvReplay
+  include Beefcake::Message
+end
+
+class CCLCMsg_HltvReplay
+  include Beefcake::Message
+end
+
 class CMsgVector
   optional :x, :float, 1
   optional :y, :float, 2
@@ -330,6 +347,7 @@ class CNETMsg_Tick
   optional :host_computationtime, :uint32, 4
   optional :host_computationtime_std_deviation, :uint32, 5
   optional :host_framestarttime_std_deviation, :uint32, 6
+  optional :hltv_replay_flags, :uint32, 7
 end
 
 class CNETMsg_StringCmd
@@ -591,6 +609,7 @@ end
 class CSVCMsg_UserMessage
   optional :msg_type, :int32, 1
   optional :msg_data, :bytes, 2
+  optional :passthrough, :int32, 3
 end
 
 class CSVCMsg_PaintmapData
@@ -613,6 +632,7 @@ class CSVCMsg_GameEvent
   optional :event_name, :string, 1
   optional :eventid, :int32, 2
   repeated :keys, CSVCMsg_GameEvent::Key_t, 3
+  optional :passthrough, :int32, 4
 end
 
 class CSVCMsg_GameEventList
@@ -622,12 +642,12 @@ class CSVCMsg_GameEventList
     optional :name, :string, 2
   end
 
-  class Descriptor
+  class Descriptor_t
     optional :eventid, :int32, 1
     optional :name, :string, 2
     repeated :keys, CSVCMsg_GameEventList::Key_t, 3
   end
-  repeated :descriptors, CSVCMsg_GameEventList::Descriptor, 1
+  repeated :descriptors, CSVCMsg_GameEventList::Descriptor_t, 1
 end
 
 class CSVCMsg_TempEntities
@@ -684,4 +704,22 @@ end
 class CSVCMsg_EncryptedData
   optional :encrypted, :bytes, 1
   optional :key_type, :int32, 2
+end
+
+class CSVCMsg_HltvReplay
+  optional :delay, :int32, 1
+  optional :primary_target, :int32, 2
+  optional :replay_stop_at, :int32, 3
+  optional :replay_start_at, :int32, 4
+  optional :replay_slowdown_begin, :int32, 5
+  optional :replay_slowdown_end, :int32, 6
+  optional :replay_slowdown_rate, :float, 7
+end
+
+class CCLCMsg_HltvReplay
+  optional :request, :int32, 1
+  optional :slowdown_length, :float, 2
+  optional :slowdown_rate, :float, 3
+  optional :primary_target_ent_index, :int32, 4
+  optional :event_time, :float, 5
 end

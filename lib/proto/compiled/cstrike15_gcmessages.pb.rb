@@ -151,6 +151,18 @@ class MatchEndItemUpdates
   include Beefcake::Message
 end
 
+class ScoreLeaderboardData
+  include Beefcake::Message
+
+  class Entry
+    include Beefcake::Message
+  end
+
+  class AccountEntries
+    include Beefcake::Message
+  end
+end
+
 class PlayerQuestData
   include Beefcake::Message
 
@@ -256,10 +268,6 @@ class CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon
 end
 
 class CMsgGCCStrike15_v2_MatchmakingServer2GCKick
-  include Beefcake::Message
-end
-
-class CDataGCCStrike15_v2_MatchmakingLockedInMatch
   include Beefcake::Message
 end
 
@@ -689,6 +697,23 @@ class MatchEndItemUpdates
   optional :item_attr_delta_value, :uint32, 3
 end
 
+class ScoreLeaderboardData
+
+  class Entry
+    optional :tag, :uint32, 1
+    optional :val, :uint32, 2
+  end
+
+  class AccountEntries
+    optional :accountid, :uint32, 1
+    repeated :entries, ScoreLeaderboardData::Entry, 2
+  end
+  optional :quest_id, :uint64, 1
+  optional :score, :uint32, 2
+  repeated :accountentries, ScoreLeaderboardData::AccountEntries, 3
+  repeated :matchentries, ScoreLeaderboardData::Entry, 5
+end
+
 class PlayerQuestData
 
   class QuestItemData
@@ -706,6 +731,9 @@ end
 
 class CMsgGC_ServerQuestUpdateData
   repeated :player_quest_data, PlayerQuestData, 1
+  optional :binary_data, :bytes, 2
+  optional :mm_game_mode, :uint32, 3
+  optional :missionlbsdata, ScoreLeaderboardData, 4
 end
 
 class CMsgGCCStrike15_v2_MatchmakingGCOperationalStats
@@ -828,12 +856,14 @@ class CMsgGCCStrike15_v2_MatchmakingServerReservationResponse
   optional :reward_item_attr_reward_idx, :uint32, 11
   optional :reward_drop_list, :uint32, 12
   optional :tournament_tag, :string, 13
+  optional :steamdatagram_port, :uint32, 14
 end
 
 class CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve
   optional :serverid, :uint64, 1
-  optional :serverip, :uint32, 2
-  optional :serverport, :uint32, 3
+  optional :server_address, :string, 7
+  optional :legacy_serverip, :uint32, 2
+  optional :legacy_serverport, :uint32, 3
   optional :reservationid, :uint64, 4
   optional :reservation, CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve, 5
   optional :map, :string, 6
@@ -880,6 +910,7 @@ class CMsgGCCStrike15_v2_MatchmakingServerMatchEnd
   optional :replay_cluster_id, :uint32, 6
   optional :aborted_match, :bool, 7
   optional :match_end_quest_data, CMsgGC_ServerQuestUpdateData, 8
+  optional :server_version, :uint32, 9
 end
 
 class CMsgGCCStrike15_v2_MatchmakingClient2GCHello
@@ -928,13 +959,6 @@ class CMsgGCCStrike15_v2_MatchmakingServer2GCKick
   optional :reason, :uint32, 3
 end
 
-class CDataGCCStrike15_v2_MatchmakingLockedInMatch
-  optional :client_reservation, CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve, 1
-  optional :server_stats, CMsgGCCStrike15_v2_MatchmakingServerRoundStats, 2
-  optional :rtime32_server_info, :uint32, 3
-  optional :last_round_stats_temp, CMsgGCCStrike15_v2_MatchmakingServerRoundStats, 4
-end
-
 class CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate
   repeated :rankings, PlayerRankingInfo, 1
   optional :match_id, :uint64, 2
@@ -973,6 +997,7 @@ class CMsgGCCStrike15_v2_ClientReportServer
   optional :rpt_abusivemodels, :uint32, 2
   optional :rpt_badmotd, :uint32, 3
   optional :rpt_listingabuse, :uint32, 4
+  optional :rpt_inventoryabuse, :uint32, 5
   optional :match_id, :uint64, 8
 end
 
