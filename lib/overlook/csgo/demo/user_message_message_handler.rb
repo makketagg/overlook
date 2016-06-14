@@ -22,11 +22,19 @@ module Overlook
             # nop
           when XP_UPDATE_MESSAGE_TYPE
             xp_update_message =  CCSUsrMsg_XpUpdate.decode(user_message.msg_data)
-
             community_id = SteamID32.parse("[U:1:#{xp_update_message.data.account_id}]").to_steamID64.to_s
-            xp_update_message.data.xp_progress_data.each do |update|
-              # wip
-            end
+
+            xp_update = {
+              community_id => {
+                xp: xp_update_message.data.current_xp,
+                lvl: xp_update_message.data.current_level,
+                progress: xp_update_message.data.xp_progress_data.map do |item|
+                  { category: item.xp_category, xp: item.xp_points }
+                end
+              }
+            }
+
+            @parser.emit(:xp_update, xp_update)
           when SERVER_RANK_UPDATE_MESSAGE_TYPE
             server_rank_update_message = CCSUsrMsg_ServerRankUpdate.decode(user_message.msg_data)
 
@@ -35,7 +43,7 @@ module Overlook
               # [U:1:account_id]
               community_id = SteamID32.parse("[U:1:#{update.account_id}]").to_steamID64.to_s
 
-              @parser.emit(:rank_update, 
+              @parser.emit(:rank_update,
                             { community_id: community_id, rank: update.rank_new })
             end
           end
