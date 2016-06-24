@@ -51,7 +51,7 @@ module Overlook
         end
 
         def unknown?
-          type == :stop
+          type == :unknown
         end
 
         def stop?
