@@ -15,7 +15,6 @@ require 'overlook/csgo/demo/game_event_list_message_handler'
 require 'overlook/csgo/demo/game_event_message_handler'
 require 'overlook/csgo/demo/encrypted_data_handler'
 
-require 'overlook/csgo/demo/command_factory'
 require 'overlook/csgo/demo/packet_factory'
 
 module Overlook

@@ -44,7 +44,7 @@ module Overlook
           packet_handler = PacketHandler.new(self)
 
           loop do
-            command = CommandFactory.from_io(reader)
+            command = Command.from_io(reader)
 
             next if command.sync?
             break if command.stop?
