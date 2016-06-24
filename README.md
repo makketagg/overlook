@@ -7,7 +7,7 @@ Ruby access to CS:GO demo files.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'overlook'
+gem 'overlook-csgo'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install overlook
+    $ gem install overlook-csgo
 
 ## Usage
 
