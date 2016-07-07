@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+ - 2.2.3
+ - 2.3.0
+before_install:
+  - ls -a
+  - pwd
+  - git clone https://github.com/github/git-lfs.git
+  - cd git-lfs
+  - git checkout 05666983c2e19664b8fc47c30b767ec160e3fea5
+  - script/bootstrap
+  - cd ..
+  - ls -a
+  - pwd
+  - git-lfs/bin/git-lfs init
+  - git-lfs/bin/git-lfs env
+  - git-lfs/bin/git-lfs pull
+install:
+  - bundle
+script: rake spec:all

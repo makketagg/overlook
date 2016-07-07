@@ -11,7 +11,7 @@ module Overlook
         end
 
         it 'can decode match info from an io stream' do
-          path = File.expand_path('./spec/fixtures/demo.dem.info')
+          path = File.expand_path("#{fixture_directory}/demo.dem.info")
           io = File.open(path)
 
           match_info  = @decoder.decode(io)

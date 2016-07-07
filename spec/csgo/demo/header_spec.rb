@@ -8,7 +8,7 @@ module Overlook
         describe '.from_io' do
           it 'can create a header from io stream' do
             io = ByteReader.new(
-              File.open(File.expand_path("./spec/fixtures/header.bin"))
+              File.open(File.expand_path("#{fixture_directory}/header.bin"))
             )
 
             header = Header.from_io(io)
@@ -19,7 +19,7 @@ module Overlook
 
           it 'raises an error if invalid stamp' do
             io = ByteReader.new(
-              File.open(File.expand_path("./spec/fixtures/header.bin"))
+              File.open(File.expand_path("#{fixture_directory}/header.bin"))
             )
 
             expect(io).to receive(:read).with(8).and_return('bad-stamp')
