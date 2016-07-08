@@ -1,3 +1,5 @@
+require 'steamidlib'
+
 require 'overlook/version'
 require 'overlook/csgo'
 
@@ -9,8 +11,6 @@ require 'proto/compiled/descriptor.pb'
 require 'proto/compiled/netmessages.pb'
 require 'proto/compiled/cstrike15_gcmessages.pb'
 require 'proto/compiled/cstrike15_usermessages.pb'
-
-require 'steamidlib'
 
 module Overlook
   def self.decode_share_code(code)

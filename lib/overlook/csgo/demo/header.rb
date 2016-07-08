@@ -3,14 +3,16 @@ module Overlook
   module Csgo
     module Demo
       class Header
+        InvalidHeader = Class.new(StandardError)
+
         MAX_STRING_LENGTH = 260.freeze
 
-        attr_accessor :map_name
+        attr_reader :map_name, :ticks
 
-        def initialize(map_name)
+        def initialize(map_name, ticks)
           raise ArgumentError 'map_name can\'t be nil' if map_name.nil?
-
-          @map_name       = map_name
+          @map_name = map_name
+          @ticks = ticks
         end
 
         def to_hash
@@ -34,10 +36,10 @@ module Overlook
           frames           = reader.signed_int32
           signon_length    = reader.signed_int32
 
-          raise InvalidDemo, "#{self.class.name} only supports HL2DEMO, got #{stamp}" if stamp !~ /hl2demo/i
-          raise InvalidDemo, "#{self.class.name} only supports Valve demo files." if server_name !~ /valve/i
+          raise InvalidHeader, "#{self.class.name} only supports HL2DEMO, got #{stamp}" if stamp !~ /hl2demo/i
+          raise InvalidHeader, "#{self.class.name} only supports Valve demo files." if server_name !~ /valve/i
 
-          new(map_name)
+          new(map_name, ticks)
         end
       end
     end

@@ -27,6 +27,14 @@ module Overlook
           @tick = 0 unless packet?
         end
 
+        def self.from_io(reader)
+          cmd         = reader.byte
+          tick        = reader.signed_int32
+          slot        = reader.byte
+
+          new(cmd, tick, slot)
+        end
+
         def type
           case @type
           when Command::TYPE::PACKET, Command::TYPE::SIGNON
@@ -43,7 +51,7 @@ module Overlook
         end
 
         def unknown?
-          type == :stop
+          type == :unknown
         end
 
         def stop?

@@ -69,6 +69,7 @@ module SVC_Messages
   svc_CmdKeyValues = 34
   svc_EncryptedData = 35
   svc_HltvReplay = 36
+  svc_Broadcast_Command = 38
 end
 
 module ReplayEventType_t
@@ -315,6 +316,10 @@ class CSVCMsg_HltvReplay
 end
 
 class CCLCMsg_HltvReplay
+  include Beefcake::Message
+end
+
+class CSVCMsg_Broadcast_Command
   include Beefcake::Message
 end
 
@@ -722,4 +727,8 @@ class CCLCMsg_HltvReplay
   optional :slowdown_rate, :float, 3
   optional :primary_target_ent_index, :int32, 4
   optional :event_time, :float, 5
+end
+
+class CSVCMsg_Broadcast_Command
+  optional :cmd, :string, 1
 end

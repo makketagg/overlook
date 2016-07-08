@@ -1,5 +1,4 @@
 require 'stringio'
-require 'steamidlib'
 
 module Overlook
   module Csgo
