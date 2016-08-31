@@ -153,16 +153,16 @@ module Overlook
           it 'should parse ranks' do
             expect(@subscriber.ranks_spy.count).to eq(10)
             expect(@subscriber.ranks_spy).to eq([
-              {change: 0, wins: 169, community_id: '76561198162989408', rank: 13},
-              {change: 0, wins: 53,  community_id: '76561198202011574', rank: 12},
-              {change: 0, wins: 244, community_id: '76561198020958035', rank: 12},
-              {change: 0, wins: 3,   community_id: '76561197993676604', rank: 0 },
-              {change: 0, wins: 284, community_id: '76561197970670011', rank: 12},
-              {change: 0, wins: 220, community_id: '76561198141027724', rank: 12},
-              {change: 0, wins: 97,  community_id: '76561197973670837', rank: 11},
-              {change: 0, wins: 183, community_id: '76561197998193728', rank: 12},
-              {change: 0, wins: 93,  community_id: '76561198064937789', rank: 10},
-              {change: 0, wins: 115, community_id: '76561198055983282', rank: 12},
+              {rank_change: 0, wins: 169, community_id: '76561198162989408', rank: 13},
+              {rank_change: 0, wins: 53,  community_id: '76561198202011574', rank: 12},
+              {rank_change: 0, wins: 244, community_id: '76561198020958035', rank: 12},
+              {rank_change: 0, wins: 3,   community_id: '76561197993676604', rank: 0 },
+              {rank_change: 0, wins: 284, community_id: '76561197970670011', rank: 12},
+              {rank_change: 0, wins: 220, community_id: '76561198141027724', rank: 12},
+              {rank_change: 0, wins: 97,  community_id: '76561197973670837', rank: 11},
+              {rank_change: 0, wins: 183, community_id: '76561197998193728', rank: 12},
+              {rank_change: 0, wins: 93,  community_id: '76561198064937789', rank: 10},
+              {rank_change: 0, wins: 115, community_id: '76561198055983282', rank: 12},
             ])
           end
         end
