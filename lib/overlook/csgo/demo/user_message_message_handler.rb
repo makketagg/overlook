@@ -43,8 +43,10 @@ module Overlook
               # [U:1:account_id]
               community_id = SteamID32.parse("[U:1:#{update.account_id}]").to_steamID64.to_s
 
-              @parser.emit(:rank_update,
-                            { community_id: community_id, rank: update.rank_new })
+              rank_update_payload = { change: update.rank_change.to_i, wins: update.num_wins,
+                                      community_id: community_id, rank: update.rank_new }
+
+              @parser.emit(:rank_update, rank_update_payload)
             end
           end
         end
