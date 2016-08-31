@@ -33,7 +33,7 @@ class ReplayAnalyzerSubscriber
 
   # Fired whenever a rank change happens.
   # The update event comes in the form
-  #   { community_id: 'ABC', rank: 12 }
+  #   { wins: 12, change: 1, community_id: 'ABC', rank: 12 }
   def rank_update(event)
     self.rank_events << event
   end
