@@ -3,8 +3,8 @@ module Overlook
   module Csgo
     module Demo
       class Base
-        def initialize(io)
-          @parser = Parser.new(io)
+        def initialize(io, parser_config = ParserConfig.new)
+          @parser = Parser.new(io, parser_config)
         end
 
         def subscribe(subscriber)

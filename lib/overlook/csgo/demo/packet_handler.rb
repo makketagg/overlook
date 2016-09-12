@@ -13,8 +13,9 @@ module Overlook
 
         attr_reader :parser
 
-        def initialize(_parser)
+        def initialize(_parser, parser_config)
           @parser = _parser
+          @parser_config = parser_config
         end
 
         def handle(packet)
@@ -24,7 +25,8 @@ module Overlook
             message_type  = reader.var_int32
             message_size  = reader.var_int32
 
-            if handler = handlers[message_type]
+            handler = handlers[message_type]
+            if handler && handle?(handler)
               handler.handle(reader.bytes(message_size))
             else
               reader.skip(message_size)
@@ -38,11 +40,24 @@ module Overlook
 
         def handlers
           {
-            MessageTypes::USER_MESSAGE_MESSAGE_ID => UserMessageMessageHandler.new(parser),
+            MessageTypes::USER_MESSAGE_MESSAGE_ID    => UserMessageMessageHandler.new(parser),
             MessageTypes::GAME_EVENT_LIST_MESSAGE_ID => GameEventListMessageHandler.new(parser),
-            MessageTypes::GAME_EVENT_MESSAGE_ID => GameEventMessageHandler.new(parser),
-            MessageTypes::ENCRYPTED_DATA_ID => EncryptedDataHandler.new(parser),
+            MessageTypes::GAME_EVENT_MESSAGE_ID      => GameEventMessageHandler.new(parser),
+            MessageTypes::ENCRYPTED_DATA_ID          => EncryptedDataHandler.new(parser),
           }
+        end
+
+        def handle?(handler)
+          case handler
+          when GameEventListMessageHandler, GameEventMessageHandler
+            @parser_config.parse_game_events?
+          when UserMessageMessageHandler
+            @parser_config.parse_user_messages?
+          when EncryptedDataHandler
+            @parser_config.parse_encrypted_data?
+          else
+            true
+          end
         end
       end
     end

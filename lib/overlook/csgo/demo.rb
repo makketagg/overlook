@@ -4,6 +4,7 @@ require 'overlook/csgo/demo/packet'
 require 'overlook/csgo/demo/command'
 require 'overlook/csgo/demo/header'
 
+require 'overlook/csgo/demo/parser_config'
 require 'overlook/csgo/demo/parser'
 
 require 'overlook/csgo/demo/key_reader'
