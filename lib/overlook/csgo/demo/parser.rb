@@ -13,7 +13,7 @@ module Overlook
         attr_reader   :parser_config
         attr_accessor :descriptors
 
-        def initialize(io, parser_config = ParserConfig.new)
+        def initialize(io, parser_config)
           @parser_config = parser_config
           @reader  = ByteReader.new(io)
           @header  = nil
