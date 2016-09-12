@@ -22,8 +22,8 @@ module Overlook
   module Csgo
     module Demo
       class << self
-        def open(io)
-          Base.new(io)
+        def open(io, parser_config = ParserConfig.new)
+          Base.new(io, parser_config)
         end
 
         alias :new :open

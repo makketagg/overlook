@@ -33,7 +33,7 @@ module Overlook
 
           @subscriber = Subscriber.new
 
-          @parser = Parser.new(File.open(File.expand_path("#{fixture_directory}/demo.dem")))
+          @parser = Demo.open(File.open(File.expand_path("#{fixture_directory}/demo.dem")))
           @parser.subscribe(@subscriber)
           @parser.parse
         end
