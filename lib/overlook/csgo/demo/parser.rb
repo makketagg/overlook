@@ -10,9 +10,11 @@ module Overlook
         InvalidDemo = Class.new(Exception)
 
         attr_reader   :reader
+        attr_reader   :parser_config
         attr_accessor :descriptors
 
-        def initialize(io)
+        def initialize(io, parser_config = ParserConfig.new)
+          @parser_config = parser_config
           @reader  = ByteReader.new(io)
           @header  = nil
           @descriptors = {}
@@ -41,7 +43,7 @@ module Overlook
         end
 
         def packets
-          packet_handler = PacketHandler.new(self)
+          packet_handler = PacketHandler.new(self, @parser_config)
 
           loop do
             command = Command.from_io(reader)
