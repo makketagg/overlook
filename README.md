@@ -75,3 +75,6 @@ Overlook.decode_share_code('CSGO-MXzcE-vo6oX-LuOhB-Vhn7m-xiHeB')
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/taylorfinnell/overlook.
 
+## License
+
+MIT
