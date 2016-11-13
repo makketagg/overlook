@@ -3,6 +3,7 @@ rvm:
  - 2.2.3
  - 2.3.0
 before_install:
+# https://github.com/github/git-lfs/issues/880
   - ls -a
   - pwd
   - git clone https://github.com/github/git-lfs.git
@@ -12,9 +13,9 @@ before_install:
   - cd ..
   - ls -a
   - pwd
-  - git-lfs/bin/git-lfs init
-  - git-lfs/bin/git-lfs env
-  - git-lfs/bin/git-lfs pull
+  - git-lfs/bin/git-lfs init | cat
+  - git-lfs/bin/git-lfs env  | cat
+  - git-lfs/bin/git-lfs pull | cat
 install:
   - bundle
 script: rake spec:all

@@ -3,3 +3,4 @@ tmp/*
 lib/proto/proto/*
 .DS_Store
 spec/.DS_Store
+Gemfile.lock

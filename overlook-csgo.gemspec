@@ -19,18 +19,18 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   # For protobuf
-  spec.add_dependency 'beefcake'
+  spec.add_dependency 'beefcake', '= 1.2.0'
 
   # To handle converting steam ids between their various formats
-  spec.add_dependency 'steamidlib'
+  spec.add_dependency 'steamidlib', '= 1.0.1'
 
   # For a simple pub\sub implementation
-  spec.add_dependency 'wisper'
+  spec.add_dependency 'wisper', '= 1.6.1'
 
   spec.add_development_dependency 'bundler',  '~> 1.10'
-  spec.add_development_dependency 'rake',     '~> 10.0'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'yard'
-  spec.add_development_dependency 'rubycritic'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.5'
+  spec.add_development_dependency 'pry', '~> 0.10.4'
+  spec.add_development_dependency 'yard', '~> 0.9.5'
+  spec.add_development_dependency 'rubycritic', '~> 3.0'
 end
