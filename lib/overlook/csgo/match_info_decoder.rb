@@ -9,7 +9,7 @@ module Overlook
       end
 
       def decode(io)
-        match = CDataGCCStrike15_v2_MatchInfo.decode(io.read)
+        match = ::Csgo::CDataGCCStrike15_v2_MatchInfo.decode(io.read)
 
         decoded = {}
         decoded.merge!(extract_match_meta(match))

@@ -40,10 +40,10 @@ module Overlook
 
         def handlers
           {
-            MessageTypes::USER_MESSAGE_MESSAGE_ID    => UserMessageMessageHandler.new(parser),
-            MessageTypes::GAME_EVENT_LIST_MESSAGE_ID => GameEventListMessageHandler.new(parser),
-            MessageTypes::GAME_EVENT_MESSAGE_ID      => GameEventMessageHandler.new(parser),
-            MessageTypes::ENCRYPTED_DATA_ID          => EncryptedDataHandler.new(parser),
+            ::Csgo::SVC_Messages::Svc_UserMessage   => UserMessageMessageHandler.new(parser),
+            ::Csgo::SVC_Messages::Svc_GameEventList => GameEventListMessageHandler.new(parser),
+            ::Csgo::SVC_Messages::Svc_GameEvent     => GameEventMessageHandler.new(parser),
+            ::Csgo::SVC_Messages::Svc_EncryptedData => EncryptedDataHandler.new(parser),
           }
         end
 

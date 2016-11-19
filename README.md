@@ -1,5 +1,6 @@
 # Overlook
 [![Build Status](https://travis-ci.org/fastpeek/overlook.svg?branch=master)](https://travis-ci.org/fastpeek/overlook)
+![Gem Version](https://img.shields.io/gem/v/overlook-csgo.svg)
 
 Ruby access to CS:GO demo files.
 

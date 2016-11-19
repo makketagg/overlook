@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Ruby access to CS:GO demo files.}
   spec.description   = %q{Ruby access to CS:GO demo files.}
   spec.homepage      = 'http://github.com/taylorfinnell/overlook'
+  spec.licenses      = ['MIT']
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'exe'
@@ -26,6 +27,9 @@ Gem::Specification.new do |spec|
 
   # For a simple pub\sub implementation
   spec.add_dependency 'wisper', '= 1.6.1'
+
+  # For protobufs
+  spec.add_dependency 'steam-proto', '~> 0.1'
 
   spec.add_development_dependency 'bundler',  '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'

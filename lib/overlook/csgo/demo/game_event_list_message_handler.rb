@@ -7,7 +7,7 @@ module Overlook
         end
 
         def handle(message)
-          game_event_list_message = CSVCMsg_GameEventList.decode(message)
+          game_event_list_message = ::Csgo::CSVCMsg_GameEventList.decode(message)
 
           game_event_list_message.descriptors.each do |descriptor|
             @parser.descriptors[descriptor.eventid] ||= descriptor
