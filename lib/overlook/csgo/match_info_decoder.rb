@@ -3,11 +3,6 @@ require 'stringio'
 module Overlook
   module Csgo
     class MatchInfoDecoder
-      include SteamIDs
-
-      def initialize
-      end
-
       def decode(io)
         match = ::Csgo::CDataGCCStrike15_v2_MatchInfo.decode(io.read)
 
@@ -69,7 +64,7 @@ module Overlook
       end
 
       def extract_round_stats(round)
-        players = round.reservation.account_ids.collect! { |id| SteamID32.parse("[U:1:#{id}]").to_steamID64.to_s }
+        players = round.reservation.account_ids.collect! { |id| Steam3Id.parse("[U:1:#{id}]").to_i.to_s }
 
         raise RuntimeError,
               "Invalid player list, expected 10 players got #{players.count}" unless players.count == 10

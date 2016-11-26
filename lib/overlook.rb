@@ -1,4 +1,4 @@
-require 'steamidlib'
+require 'steam/id'
 require 'steam/proto'
 Steam::Proto.load_protobufs(:csgo)
 

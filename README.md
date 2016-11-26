@@ -46,7 +46,7 @@ class ReplayAnalyzerSubscriber
   # The header event comes in the form
   #   { map_name: 'cs_office' }
   def header(header)
-    # do something with the header.map_name
+    # do something with the header[:map_name]
   end
 
   # Called when the replay has been parsed successfully.

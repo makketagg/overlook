@@ -19,11 +19,13 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.3.1'
+
   # For protobuf
   spec.add_dependency 'beefcake', '= 1.2.0'
 
   # To handle converting steam ids between their various formats
-  spec.add_dependency 'steamidlib', '= 1.0.1'
+  spec.add_dependency 'steam-id', '= 0.1.0'
 
   # For a simple pub\sub implementation
   spec.add_dependency 'wisper', '= 1.6.1'
