@@ -39,6 +39,7 @@ module Overlook
 
         def done
           emit(:done)
+          @reader.close
           true
         end
 

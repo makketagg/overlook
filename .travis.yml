@@ -17,4 +17,4 @@ before_install:
   - git-lfs/bin/git-lfs pull | cat
 install:
   - bundle
-script: rake spec:all
+script: rake compile && rake spec:all

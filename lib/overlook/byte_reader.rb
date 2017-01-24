@@ -54,5 +54,6 @@ module Overlook
     def_delegator :@io, :read, :read
     def_delegator :@io, :tell, :tell
     def_delegator :@io, :lineno, :lineno
+    def_delegator :@io, :close, :close
   end
 end

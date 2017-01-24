@@ -9,6 +9,8 @@ require 'overlook/bit_buffer'
 require 'overlook/bit_reader'
 require 'overlook/byte_reader'
 
+require 'fast_byte_reader'
+
 module Overlook
   def self.decode_share_code(code)
     decoder = Csgo::SharecodeDecoder.new(code)

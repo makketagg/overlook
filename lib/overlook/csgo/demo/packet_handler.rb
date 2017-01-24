@@ -19,7 +19,7 @@ module Overlook
         end
 
         def handle(packet)
-          reader = BitReader.new(packet.data)
+          reader = FastByteReader.new(packet.data)
 
           loop do
             message_type  = reader.var_int32
@@ -27,19 +27,22 @@ module Overlook
 
             handler = handlers[message_type]
             if handler && handle?(handler)
-              handler.handle(reader.bytes(message_size))
+              handler.handle(reader.read(message_size))
             else
-              reader.skip(message_size)
+              reader.seek(message_size)
             end
 
-            break if reader.eof?
+            if reader.eof?
+              reader.close
+              break
+            end
           end
         end
 
         private
 
         def handlers
-          {
+          @handlers ||= {
             ::Csgo::SVC_Messages::Svc_UserMessage   => UserMessageMessageHandler.new(parser),
             ::Csgo::SVC_Messages::Svc_GameEventList => GameEventListMessageHandler.new(parser),
             ::Csgo::SVC_Messages::Svc_GameEvent     => GameEventMessageHandler.new(parser),

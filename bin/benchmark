@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'overlook'
+require 'benchmark'
+
+class Subscriber
+end
+
+def parse
+  raise "give demo file as argument usage: ./bin/benchmark mydemo.dem" unless ARGV.first
+  @subscriber = Subscriber.new
+
+  @parser = Overlook::Csgo::Demo.open(File.open(ARGV.first))
+  @parser.subscribe(@subscriber)
+  @parser.parse
+end
+
+benchmark = Benchmark.realtime do
+  50.times { parse }
+end
+puts benchmark

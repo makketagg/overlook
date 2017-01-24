@@ -33,7 +33,8 @@ module Overlook
 
           @subscriber = Subscriber.new
 
-          @parser = Demo.open(File.open(File.expand_path("#{fixture_directory}/demo.dem")))
+          config = ParserConfig.new(parse_game_events: false)
+          @parser = Parser.new(File.open(File.expand_path("#{fixture_directory}/demo.dem")), config)
           @parser.subscribe(@subscriber)
           @parser.parse
         end
