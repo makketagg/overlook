@@ -51,9 +51,29 @@ module Overlook
       io.read(2).unpack('<s*').first
     end
 
+    def var_int32
+      var_int(4)
+    end
+
+    def var_int(max_len)
+      _byte = 0
+      count = 0
+      result = 0
+
+      loop do
+        return result if count + 1 == max_len
+        _byte = self.byte
+        result |= (_byte & 0x7F) << (7 * count)
+        count = count + 1
+        break if _byte & 0x80 == 0
+      end
+      result
+    end
+
     def_delegator :@io, :read, :read
     def_delegator :@io, :tell, :tell
     def_delegator :@io, :lineno, :lineno
     def_delegator :@io, :close, :close
+    def_delegator :@io, :eof?, :eof?
   end
 end

@@ -19,7 +19,7 @@ module Overlook
         end
 
         def handle(packet)
-          reader = FastByteReader.new(packet.data)
+          reader = ByteReader.new(packet.data)
 
           loop do
             message_type  = reader.var_int32
