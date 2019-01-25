@@ -37,7 +37,6 @@ module Overlook
           signon_length    = reader.signed_int32
 
           raise InvalidHeader, "#{self.class.name} only supports HL2DEMO, got #{stamp}" if stamp !~ /hl2demo/i
-          raise InvalidHeader, "#{self.class.name} only supports Valve demo files." if server_name !~ /valve/i
 
           new(map_name, ticks)
         end
